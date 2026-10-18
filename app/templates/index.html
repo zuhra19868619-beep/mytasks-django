@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyTasks — Мои задачи</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            font-family: Arial, sans-serif;
+            background: #111318;
+            color: #f1f1f1;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #9297a5;
+            margin-bottom: 30px;
+        }
+
+        .task-card {
+            background: #1c1f27;
+            border: 1px solid #303440;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 12px;
+        }
+
+        .task-title {
+            font-size: 16px;
+            margin: 0 0 8px;
+        }
+
+        .task-description {
+            color: #9297a5;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .badge {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 5px 9px;
+            border-radius: 6px;
+            background: #293c32;
+            color: #8be0a9;
+            font-size: 12px;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 25px 15px;
+            }
+
+            h1 {
+                font-size: 27px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <h1>Мои задачи</h1>
+
+        <p class="subtitle">
+            Небольшие шаги приводят к большим результатам.
+        </p>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <input
+        type="text"
+        name="title"
+        placeholder="Название новой задачи..."
+        required
+    >
+
+    <button type="submit">Добавить задачу</button>
+</form>
+
+        {% for task in tasks %}
+            <div class="task-card">
+                <h2 class="task-title">{{ task.title }}</h2>
+                <p class="task-description">
+                    {{ task.description }}
+                </p>
+                <span class="badge">В процессе</span>
+            </div>
+        {% endfor %}
+    </main>
+</body>
+</html>
